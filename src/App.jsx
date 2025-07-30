@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import WorkoutForm from "./components/WorkoutForm";
 import WorkoutList from "./components/WorkoutList";
 import ProgressChart from "./components/ProgressChart";
-import { db, ref, set, push, onValue, remove } from "./firebase";
+import { db, ref, set, push, onValue, remove } from "./components/firebase";
 
 const App = () => {
   const [workouts, setWorkouts] = useState([]);
