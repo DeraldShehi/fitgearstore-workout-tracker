@@ -169,7 +169,7 @@ body {
 }
 
 .form-input {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--primary-blue);
   padding: 0.75rem;
   border-radius: var(--border-radius-lg);
   width: 100%;
