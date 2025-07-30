@@ -17,7 +17,7 @@ const WorkoutList = ({ workouts, onDelete }) => {
                 {w.name} – {w.reps} reps × {w.weight} kg
               </span>
               <button
-                onClick={() => onDelete(i)}
+                onClick={() => onDelete(w.id)}
                 className="text-red-500 hover:underline"
               >
                 Delete
