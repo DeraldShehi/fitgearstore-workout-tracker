@@ -1,30 +1,27 @@
-const WorkoutList = ({ workouts, onDelete }) => {
+const WorkoutList = ({ workouts, onDelete, darkMode }) => {
   return (
-    <div className="bg-blue-50 p-4 rounded-xl shadow">
-      <h2 className="font-semibold text-xl text-blue-700 mb-3">
+    <div className={`card ${darkMode ? "dark-mode" : ""}`}>
+      <h2 className={`card-title ${darkMode ? "dark-mode" : ""}`}>
         Today's Workouts
       </h2>
       {workouts.length === 0 ? (
-        <p className="text-gray-500 italic">No workouts added yet.</p>
+        <p className="empty-state">No workouts added yet.</p>
       ) : (
-        <ul className="space-y-2">
+        <div className="workout-list">
           {workouts.map((w, i) => (
-            <li
+            <div
               key={i}
-              className="flex justify-between items-center border border-blue-200 bg-white p-3 rounded-lg hover:shadow"
+              className={`workout-item fade-in ${darkMode ? "dark-mode" : ""}`}
             >
-              <span className="text-blue-800">
+              <span className={`workout-info ${darkMode ? "dark-mode" : ""}`}>
                 {w.name} – {w.reps} reps × {w.weight} kg
               </span>
-              <button
-                onClick={() => onDelete(w.id)}
-                className="text-red-500 hover:underline"
-              >
+              <button onClick={() => onDelete(w.id)} className="btn-text">
                 Delete
               </button>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

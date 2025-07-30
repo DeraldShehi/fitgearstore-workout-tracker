@@ -3,10 +3,10 @@ import WorkoutForm from "./components/WorkoutForm";
 import WorkoutList from "./components/WorkoutList";
 import ProgressChart from "./components/ProgressChart";
 import { db, ref, push, onValue, remove } from "./components/firebase";
+import "./index.css";
 
 const App = () => {
   const [workouts, setWorkouts] = useState([]);
-
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem("darkMode");
     return stored ? JSON.parse(stored) : false;
@@ -48,36 +48,34 @@ const App = () => {
   };
 
   return (
-    <div
-      className={`min-h-screen px-4 py-8 ${
-        darkMode
-          ? "bg-gray-900 text-white"
-          : "bg-gradient-to-br from-blue-50 to-blue-200 text-gray-900"
-      }`}
-    >
-      <div className="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl space-y-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-center text-orange-700 dark:text-orange-700 w-full">
-            🏋️ FitGearStore - Workout Tracker App
-          </h1>
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="ml-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded shadow"
-          >
-            {darkMode ? "🌞 Light" : "🌙 Dark"}
-          </button>
+    <div className={`app-container ${darkMode ? "dark-mode" : "light-mode"}`}>
+      <div className={`main-wrapper ${darkMode ? "dark-mode" : ""}`}>
+        <div className="content-space">
+          <div className="header">
+            <h1 className="app-title">🏋️ FitGearStore - Workout Tracker App</h1>
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`theme-toggle ${darkMode ? "dark-mode" : ""}`}
+            >
+              {darkMode ? "🌞 Light" : "🌙 Dark"}
+            </button>
+          </div>
+
+          <WorkoutForm onAdd={addWorkout} darkMode={darkMode} />
+          <WorkoutList
+            workouts={workouts}
+            onDelete={deleteWorkout}
+            darkMode={darkMode}
+          />
+
+          <div className="reset-container">
+            <button onClick={resetAll} className="btn btn-danger">
+              Reset All
+            </button>
+          </div>
+
+          <ProgressChart workouts={workouts} darkMode={darkMode} />
         </div>
-        <WorkoutForm onAdd={addWorkout} />
-        <WorkoutList workouts={workouts} onDelete={deleteWorkout} />
-        <div className="text-right">
-          <button
-            onClick={resetAll}
-            className="text-sm bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-          >
-            Reset All
-          </button>
-        </div>
-        <ProgressChart workouts={workouts} />
       </div>
     </div>
   );

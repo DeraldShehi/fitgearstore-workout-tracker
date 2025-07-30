@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const WorkoutForm = ({ onAdd }) => {
+const WorkoutForm = ({ onAdd, darkMode }) => {
   const [name, setName] = useState("");
   const [reps, setReps] = useState("");
   const [weight, setWeight] = useState("");
@@ -15,33 +15,30 @@ const WorkoutForm = ({ onAdd }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex flex-col md:flex-row gap-4">
+    <form onSubmit={handleSubmit} className="workout-form">
+      <div className="form-row">
         <input
           type="text"
           placeholder="Exercise"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className={`form-input ${darkMode ? "dark-mode" : ""}`}
         />
         <input
           type="number"
           placeholder="Reps"
           value={reps}
           onChange={(e) => setReps(e.target.value)}
-          className="border p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className={`form-input ${darkMode ? "dark-mode" : ""}`}
         />
         <input
           type="number"
           placeholder="Weight (kg)"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
-          className="border p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className={`form-input ${darkMode ? "dark-mode" : ""}`}
         />
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-3 rounded-lg"
-        >
+        <button type="submit" className="btn btn-primary">
           Add
         </button>
       </div>

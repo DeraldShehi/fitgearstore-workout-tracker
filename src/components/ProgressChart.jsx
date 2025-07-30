@@ -10,7 +10,7 @@ import {
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip);
 
-const ProgressChart = ({ workouts }) => {
+const ProgressChart = ({ workouts, darkMode }) => {
   const [weeklyData, setWeeklyData] = useState({});
 
   useEffect(() => {
@@ -38,18 +38,53 @@ const ProgressChart = ({ workouts }) => {
           weeklyData["Sat"] || 0,
           weeklyData["Sun"] || 0,
         ],
-        backgroundColor: "#3b82f6",
+        backgroundColor: darkMode ? "#60a5fa" : "#3b82f6",
         borderRadius: 6,
       },
     ],
   };
 
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        backgroundColor: darkMode ? "#374151" : "#ffffff",
+        titleColor: darkMode ? "#ffffff" : "#1f2937",
+        bodyColor: darkMode ? "#ffffff" : "#1f2937",
+        borderColor: darkMode ? "#6b7280" : "#e5e7eb",
+        borderWidth: 1,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          color: darkMode ? "#d1d5db" : "#374151",
+        },
+        grid: {
+          color: darkMode ? "#4b5563" : "#e5e7eb",
+        },
+      },
+      x: {
+        ticks: {
+          color: darkMode ? "#d1d5db" : "#374151",
+        },
+        grid: {
+          color: darkMode ? "#4b5563" : "#e5e7eb",
+        },
+      },
+    },
+  };
+
   return (
-    <div className="bg-blue-50 p-4 rounded-xl shadow">
-      <h2 className="font-semibold text-xl text-blue-700 mb-3">
+    <div className={`card ${darkMode ? "dark-mode" : ""}`}>
+      <h2 className={`card-title ${darkMode ? "dark-mode" : ""}`}>
         Weekly Progress
       </h2>
-      <Bar data={chartData} />
+      <div className="chart-container">
+        <Bar data={chartData} options={chartOptions} />
+      </div>
     </div>
   );
 };
