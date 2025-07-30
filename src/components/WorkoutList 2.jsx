@@ -8,16 +8,16 @@ const WorkoutList = ({ workouts, onDelete }) => {
         <p className="text-gray-500 italic">No workouts added yet.</p>
       ) : (
         <ul className="space-y-2">
-          {workouts.map((w, i) => (
+          {workouts.map((w) => (
             <li
-              key={i}
+              key={w.id}
               className="flex justify-between items-center border border-blue-200 bg-white p-3 rounded-lg hover:shadow"
             >
               <span className="text-blue-800">
                 {w.name} – {w.reps} reps × {w.weight} kg
               </span>
               <button
-                onClick={() => onDelete(i)}
+                onClick={() => onDelete(w.id)}
                 className="text-red-500 hover:underline"
               >
                 Delete
